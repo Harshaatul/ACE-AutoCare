@@ -1,7 +1,21 @@
 
-  # Car Care Website Homepage Design
+ # Ace Automotive Website (ACE AutoCare)
 
-  This is a code bundle for Car Care Website Homepage Design. The original project is available at https://www.figma.com/design/4qGQybvYfaTnx6UHfO7YbL/Car-Care-Website-Homepage-Design.
+A full-stack car service booking platform for customers and business owners.
+
+## Features
+- User login/signup
+- Service booking
+- Vehicle management
+- Admin dashboard
+- Appointment tracking
+
+## Tech Stack
+- React
+- Node.js
+- Express
+- PostgreSQL
+- Tailwind CSS
 
   ## Running the code
 
