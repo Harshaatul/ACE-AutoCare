@@ -13,6 +13,8 @@ import Dashboard from "../pages/Dashboard";
 
 import Brands from "./components/home/Brands";
 
+import WhyChooseUs from "./components/home/WhyChooseUs";
+
 
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -33,6 +35,9 @@ function HomePage() {
       {/* Services Section */}
       <Services />
       <Brands />
+
+      <WhyChooseUs />
+
 
       {/* ImageWithFallback */}
       <ImageWithFallback />
