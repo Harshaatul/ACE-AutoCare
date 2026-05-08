@@ -7,6 +7,8 @@ import Testimonials from "./components/home/Testimonials";
 import CTA from "./components/home/CTA";
 import Footer from "./components/layout/Footer";
 
+import BookService from "../pages/BookService";
+
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
@@ -53,7 +55,11 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+        <Route path="/book-service" element={<BookService />} />
         
+
+
       </Routes>
     </BrowserRouter>
   );
