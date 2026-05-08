@@ -11,6 +11,8 @@ import BookService from "../pages/BookService";
 
 import Dashboard from "../pages/Dashboard";
 
+import Brands from "./components/home/Brands";
+
 
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
@@ -30,6 +32,7 @@ function HomePage() {
 
       {/* Services Section */}
       <Services />
+      <Brands />
 
       {/* ImageWithFallback */}
       <ImageWithFallback />
