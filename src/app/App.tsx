@@ -9,6 +9,9 @@ import Footer from "./components/layout/Footer";
 
 import BookService from "../pages/BookService";
 
+import Dashboard from "../pages/Dashboard";
+
+
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import { ImageWithFallback } from './components/figma/ImageWithFallback';
@@ -58,6 +61,7 @@ export default function App() {
 
         <Route path="/book-service" element={<BookService />} />
         
+        <Route path="/dashboard" element={<Dashboard />} />
 
 
       </Routes>

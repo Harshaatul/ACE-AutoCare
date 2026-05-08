@@ -19,10 +19,11 @@ function Navbar() {
               {isLoggedIn ? (
 
   <button
-    className="bg-red-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-red-600 transition-colors"
-  >
-    Customer
-  </button>
+  onClick={() => navigate("/dashboard")}
+  className="bg-red-500 text-white px-6 py-2.5 rounded-lg font-semibold hover:bg-red-600 transition-colors"
+>
+  Customer
+</button>
 
 ) : (
 
