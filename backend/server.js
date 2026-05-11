@@ -124,6 +124,68 @@ app.post("/api/signup", async (req, res) => {
   }
 
 });
+app.post("/api/login", async (req, res) => {
+
+  try {
+
+    const { email, password } = req.body;
+
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+
+    if (!user) {
+
+      return res.status(400).json({
+        message: "Invalid email or password",
+      });
+
+    }
+
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password
+    );
+
+    if (!isPasswordValid) {
+
+      return res.status(400).json({
+        message: "Invalid email or password",
+      });
+
+    }
+
+    const token = jwt.sign(
+      {
+        userId: user.id,
+        email: user.email,
+      },
+      "secretkey",
+      {
+        expiresIn: "7d",
+      }
+    );
+
+    res.status(200).json({
+      message: "Login successful",
+      token,
+      user,
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      message: "Server error",
+    });
+
+  }
+
+});
+
 const PORT = 5000;
 
 app.listen(PORT, () => {
