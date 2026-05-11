@@ -22,15 +22,43 @@ function BookService() {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    console.log(formData);
+  try {
 
-    alert("Service booked successfully!");
+    const response = await fetch("http://localhost:5000/api/bookings", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-    navigate("/");
-  };
+    const data = await response.json();
+
+    if (response.ok) {
+
+      alert("Service booked successfully!");
+
+      console.log(data);
+
+      navigate("/");
+
+    } else {
+
+      alert(data.message || "Something went wrong");
+
+    }
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Server error");
+
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-100 py-16 px-4">

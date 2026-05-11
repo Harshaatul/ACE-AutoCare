@@ -52,6 +52,28 @@ app.post("/api/bookings", async (req, res) => {
 
   }
 });
+
+app.get("/api/bookings", async (req, res) => {
+  try {
+
+    const bookings = await prisma.booking.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    res.status(200).json(bookings);
+
+  } catch (error) {
+
+    console.error(error);
+
+    res.status(500).json({
+      message: "Failed to fetch bookings",
+    });
+
+  }
+});
 const PORT = 5000;
 
 app.listen(PORT, () => {
