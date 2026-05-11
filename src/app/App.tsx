@@ -1,3 +1,4 @@
+import ProtectedRoute from "./components/ProtectedRoute";
 import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/home/Hero";
@@ -10,6 +11,7 @@ import Footer from "./components/layout/Footer";
 import BookService from "../pages/BookService";
 
 import Dashboard from "../pages/Dashboard";
+
 
 import Brands from "./components/home/Brands";
 
@@ -69,7 +71,15 @@ export default function App() {
 
         <Route path="/book-service" element={<BookService />} />
         
-        <Route path="/dashboard" element={<Dashboard />} />
+
+       <Route
+         path="/dashboard"
+          element={
+            <ProtectedRoute>
+            <Dashboard />
+            </ProtectedRoute>
+          }
+        />
 
 
       </Routes>
