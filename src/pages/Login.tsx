@@ -7,17 +7,63 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleLogin = async (
+  e: React.FormEvent
+) => {
 
-    // Simple validation
-   if (email && password) {
+  e.preventDefault();
 
-  localStorage.setItem("isLoggedIn", "true");
+  try {
 
-  navigate("/");
-}
- }
+    const response = await fetch(
+      "http://localhost:5000/api/login",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+        },
+
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+
+      alert(data.message);
+
+      return;
+
+    }
+
+    localStorage.setItem(
+      "token",
+      data.token
+    );
+
+    localStorage.setItem(
+      "isLoggedIn",
+      "true"
+    );
+
+    alert("Login successful");
+
+    navigate("/dashboard");
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Server error");
+
+  }
+
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
