@@ -1,3 +1,4 @@
+const authMiddleware = require("./middleware/authMiddleware");
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -56,7 +57,7 @@ app.post("/api/bookings", async (req, res) => {
   }
 });
 
-app.get("/api/bookings", async (req, res) => {
+app.get("/api/bookings", authMiddleware, async (req, res) => {
   try {
 
     const bookings = await prisma.booking.findMany({
