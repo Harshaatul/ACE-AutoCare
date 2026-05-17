@@ -18,66 +18,104 @@ app.get("/", (req, res) => {
   res.send("ACE AutoCare Backend Running");
 });
 
-app.post("/api/bookings", async (req, res) => {
-  try {
 
-    const {
-      fullName,
-      phone,
-      carBrand,
-      service,
-      date,
-      message,
-    } = req.body;
 
-    const booking = await prisma.booking.create({
-      data: {
+/* =========================
+   CREATE BOOKING
+========================= */
+
+app.post(
+  "/api/bookings",
+  authMiddleware,
+  async (req, res) => {
+
+    try {
+
+      const {
         fullName,
         phone,
         carBrand,
         service,
-        date: new Date(date),
+        date,
         message,
-      },
-    });
+      } = req.body;
 
-    res.status(201).json({
-      message: "Booking created successfully",
-      booking,
-    });
+      const booking = await prisma.booking.create({
+        data: {
+          fullName,
+          phone,
+          carBrand,
+          service,
+          date: new Date(date),
+          message,
 
-  } catch (error) {
+          userId: req.user.userId,
+        },
+      });
 
-    console.error(error);
+      res.status(201).json({
+        message: "Booking created successfully",
+        booking,
+      });
 
-    res.status(500).json({
-      message: "Something went wrong",
-    });
+    } catch (error) {
 
-  }
-});
+      console.error(error);
 
-app.get("/api/bookings", authMiddleware, async (req, res) => {
-  try {
+      res.status(500).json({
+        message: "Something went wrong",
+      });
 
-    const bookings = await prisma.booking.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
-
-    res.status(200).json(bookings);
-
-  } catch (error) {
-
-    console.error(error);
-
-    res.status(500).json({
-      message: "Failed to fetch bookings",
-    });
+    }
 
   }
-});
+);
+
+
+
+/* =========================
+   GET USER BOOKINGS
+========================= */
+
+app.get(
+  "/api/bookings",
+  authMiddleware,
+  async (req, res) => {
+
+    try {
+
+      const bookings = await prisma.booking.findMany({
+
+        where: {
+          userId: req.user.userId,
+        },
+
+        orderBy: {
+          createdAt: "desc",
+        },
+
+      });
+
+      res.status(200).json(bookings);
+
+    } catch (error) {
+
+      console.error(error);
+
+      res.status(500).json({
+        message: "Failed to fetch bookings",
+      });
+
+    }
+
+  }
+);
+
+
+
+/* =========================
+   SIGNUP
+========================= */
 
 app.post("/api/signup", async (req, res) => {
 
@@ -125,6 +163,13 @@ app.post("/api/signup", async (req, res) => {
   }
 
 });
+
+
+
+/* =========================
+   LOGIN
+========================= */
+
 app.post("/api/login", async (req, res) => {
 
   try {
@@ -186,6 +231,12 @@ app.post("/api/login", async (req, res) => {
   }
 
 });
+
+
+
+/* =========================
+   SERVER
+========================= */
 
 const PORT = 5000;
 

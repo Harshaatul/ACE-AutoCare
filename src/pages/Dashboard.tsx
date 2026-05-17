@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -22,11 +21,18 @@ function Dashboard() {
 
       try {
 
-        const response = await fetch("http://localhost:5000/api/bookings");
+        const response = await fetch(
+          "http://localhost:5000/api/bookings",
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
 
         const data = await response.json();
 
-        setBookings(data);
+        setBookings(Array.isArray(data) ? data : []);
 
       } catch (error) {
 
@@ -42,9 +48,9 @@ function Dashboard() {
 
   const handleLogout = () => {
 
-    localStorage.removeItem("isLoggedIn");
+    localStorage.clear();
 
-    navigate("/");
+    navigate("/login");
 
   };
 
