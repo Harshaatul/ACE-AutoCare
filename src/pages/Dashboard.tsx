@@ -81,16 +81,27 @@ function Dashboard() {
 
           </div>
 
-          <button
-            onClick={handleLogout}
-            className="flex items-center gap-2 bg-red-500 hover:bg-red-600 px-5 py-3 rounded-xl font-semibold transition-colors"
-          >
+          <div className="flex items-center gap-4">
 
-            <LogOut className="w-5 h-5" />
+        <button
+           onClick={() => navigate("/")}
+           className="bg-white text-blue-600 px-5 py-3 rounded-xl font-semibold hover:bg-gray-100 transition-colors"
+        >
+          Home
+        </button>
 
-            Logout
+        <button
+           onClick={handleLogout}
+           className="flex items-center gap-2 bg-red-500 hover:bg-red-600 px-5 py-3 rounded-xl font-semibold transition-colors"
+        >
 
-          </button>
+       <LogOut className="w-5 h-5" />
+
+          Logout
+
+       </button>
+
+</div>
 
         </div>
 
@@ -190,13 +201,13 @@ function Dashboard() {
                   </h3>
 
                   <p className="text-gray-600">
-                    {booking.carBrand} • Pending
+                    {booking.carBrand} • {booking.status}
                   </p>
 
                 </div>
 
                 <div className="bg-orange-100 text-orange-700 px-5 py-2 rounded-xl font-semibold w-fit">
-                  Pending
+                     {booking.status}
                 </div>
 
               </div>

@@ -48,8 +48,9 @@ app.post(
           service,
           date: new Date(date),
           message,
-
+          status: "Pending",
           userId: req.user.userId,
+          
         },
       });
 
