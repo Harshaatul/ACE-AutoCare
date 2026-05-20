@@ -1,79 +1,192 @@
+import {
+  Wrench,
+  ShieldCheck,
+  Clock3,
+} from "lucide-react";
+
+import { useEffect, useState } from "react";
+
+import workshop from "../../../imports/workshop.jpg";
+import workshop1 from "../../../imports/workshop1.jpg";
+import workshop2 from "../../../imports/workshop2.jpg";
+import workshop3 from "../../../imports/workshop3.jpg";
+import workshop4 from "../../../imports/workshop4.jpg";
+
 function WhyChooseUs() {
+
+  const images = [
+    workshop,
+    workshop1,
+    workshop2,
+    workshop3,
+    workshop4,
+  ];
+
+  const [currentImage, setCurrentImage] = useState(0);
+
+  useEffect(() => {
+
+    const interval = setInterval(() => {
+
+      setCurrentImage((prev) => (prev + 1) % images.length);
+
+    }, 3500);
+
+    return () => clearInterval(interval);
+
+  }, []);
+
   return (
-    <section className="py-20 bg-white">
 
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="bg-[#050505] py-28 overflow-hidden">
 
-        <h2 className="text-5xl font-bold text-gray-900 mb-10">
-          Why Choose ACE Automotive Solutions?
-        </h2>
+      {/* Background Glow */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-orange-500/10 blur-[140px] rounded-full"></div>
 
-        <div
-        className="space-y-8 text-xl font-semibold text-gray-700 leading-relaxed"
-        style={{ textAlign: "justify" }}
-        >
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-red-500/10 blur-[140px] rounded-full"></div>
 
-          <p>
-            Pune is known for its busy roads, long commutes, unpredictable traffic,
-            and demanding driving conditions. Whether you're travelling daily through
-            Pimpri-Chinchwad, Hinjawadi, Wakad, Baner, or city highways, your vehicle
-            works hard every single day. Over time, continuous driving affects your
-            car’s mileage, comfort, engine performance, suspension, braking system,
-            tyres, and overall reliability.
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+        {/* TOP TEXT */}
+        <div className="text-center max-w-4xl mx-auto mb-16">
+
+          <p className="text-orange-500 uppercase tracking-[6px] text-sm font-bold mb-5">
+
+            WHY CHOOSE ACE AUTOMOTIVE SOLUTIONS
+
           </p>
 
-          <p>
-            At ACE Automotive Solutions, we understand how important your vehicle is
-            to your daily life. Your car is not just transportation — it is a part of
-            your work, family life, travel, and everyday routine. That’s why we provide
-            professional servicing, diagnostics, maintenance, repairs, detailing,
-            wheel alignment, AC servicing, and complete automobile care solutions
-            designed to keep your vehicle performing at its absolute best.
-          </p>
+          <h2 className="text-5xl md:text-6xl font-black text-white leading-tight mb-8">
 
-          <p>
-            ACE Automotive Solutions is especially known for Ford vehicle expertise,
-            making us one of the trusted destinations for Ford owners across Pune.
-            From regular Ford maintenance to advanced diagnostics and repair work,
-            our workshop focuses on delivering dealership-level quality with honest
-            pricing and personalised customer support.
-          </p>
+            Premium Car Care
+            <br />
+            Experience In Pune
 
-          <p>
-            We strongly believe in quality workmanship, genuine spare parts,
-            transparent pricing, and long-term customer trust. Every vehicle
-            entering our workshop is handled with precision, attention to detail,
-            and care by experienced technicians who are passionate about automobiles.
-          </p>
+          </h2>
 
-          <p>
-            Our services include oil changes, brake inspections, suspension work,
-            clutch repairs, wheel balancing, battery replacement, engine diagnostics,
-            AC repairs, detailing, polishing, and complete vehicle maintenance for
-            multiple automobile brands.
-          </p>
+          <p className="text-gray-400 text-xl leading-relaxed">
 
-          <p>
-            Located near Aditya Birla Hospital, Thergaon, Pune, ACE Automotive
-            Solutions services major automobile brands including Ford, Toyota,
-            Hyundai, Honda, Mahindra, Volkswagen, Skoda, Kia, MG, Chevrolet,
-            Jeep, Audi, Mercedes-Benz, and more.
-          </p>
+            From diagnostics and repairs to detailing and maintenance,
+            ACE AutoCare delivers premium automobile solutions with
+            professional expertise, genuine parts, and trusted service.
 
-          <p>
-            We continue to build our reputation through honest recommendations,
-            professional service standards, customer satisfaction, and dependable
-            automobile solutions that drivers can genuinely trust. Whether it’s
-            regular maintenance, emergency repairs, or complete car care,
-            ACE Automotive Solutions ensures your vehicle receives expert attention
-            every single time.
           </p>
 
         </div>
 
+        {/* MAIN IMAGE GALLERY */}
+        <div className="relative rounded-[36px] overflow-hidden border border-white/10 shadow-2xl">
+
+          <img
+            src={images[currentImage]}
+            alt="Workshop"
+            className="w-full h-[720px] object-cover transition-all duration-700"
+          />
+
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent"></div>
+
+          {/* Bottom Text */}
+          <div className="absolute bottom-10 left-10">
+
+            <p className="text-orange-400 uppercase tracking-[5px] text-sm font-bold mb-4">
+
+              Trusted Automotive Workshop
+
+            </p>
+
+            <h3 className="text-5xl md:text-6xl font-black text-white leading-tight">
+
+              Real Service.
+              <br />
+              Real Experts.
+
+            </h3>
+
+          </div>
+
+        </div>
+
+        {/* FEATURES */}
+        <div className="grid md:grid-cols-3 gap-8 mt-14">
+
+          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-10 hover:border-orange-500/40 transition-all duration-300">
+
+            <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6">
+
+              <Wrench className="w-8 h-8 text-orange-400" />
+
+            </div>
+
+            <h3 className="text-3xl font-bold text-white mb-4">
+
+              Expert Technicians
+
+            </h3>
+
+            <p className="text-gray-400 text-lg leading-relaxed">
+
+              Experienced professionals using advanced diagnostics
+              and modern automotive repair techniques.
+
+            </p>
+
+          </div>
+
+          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-10 hover:border-orange-500/40 transition-all duration-300">
+
+            <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6">
+
+              <ShieldCheck className="w-8 h-8 text-orange-400" />
+
+            </div>
+
+            <h3 className="text-3xl font-bold text-white mb-4">
+
+              Genuine Parts
+
+            </h3>
+
+            <p className="text-gray-400 text-lg leading-relaxed">
+
+              We use only trusted manufacturer-approved
+              components for reliability and performance.
+
+            </p>
+
+          </div>
+
+          <div className="bg-white/[0.03] border border-white/10 rounded-3xl p-10 hover:border-orange-500/40 transition-all duration-300">
+
+            <div className="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center mb-6">
+
+              <Clock3 className="w-8 h-8 text-orange-400" />
+
+            </div>
+
+            <h3 className="text-3xl font-bold text-white mb-4">
+
+              Fast Turnaround
+
+            </h3>
+
+            <p className="text-gray-400 text-lg leading-relaxed">
+
+              Quick service delivery without compromising
+              quality, safety, or workmanship.
+
+            </p>
+
+          </div>
+
+        </div>
+
       </div>
+
     </section>
+
   );
+
 }
 
 export default WhyChooseUs;

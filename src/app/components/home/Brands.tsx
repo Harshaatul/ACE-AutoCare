@@ -21,14 +21,14 @@ function Brands() {
 
   return (
 
-    <section className="relative bg-[#0a0a0a] py-24 overflow-hidden">
+    <section className="relative bg-gradient-to-b from-black via-[#050505] to-[#0a0a0a] py-24 overflow-hidden">
 
       {/* Soft Background Glow */}
       <div className="absolute top-0 left-0 w-[350px] h-[350px] bg-orange-500/5 blur-[140px] rounded-full"></div>
 
       <div className="absolute bottom-0 right-0 w-[350px] h-[350px] bg-red-500/5 blur-[140px] rounded-full"></div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 relative z-10 pb-8">
 
         {/* Ford Specialist Banner */}
         <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[#111111] shadow-[0_0_50px_rgba(249,115,22,0.05)] mb-24">
@@ -88,7 +88,7 @@ function Brands() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-12">
 
               {/* Card 1 */}
-              <div className="group relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-orange-500/20 transition-all duration-500">
+              <div className="group relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-orange-500/20 transition-all duration-500 hover:-translate-y-2">
 
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-orange-500/[0.03]"></div>
 
@@ -110,7 +110,7 @@ function Brands() {
               </div>
 
               {/* Card 2 */}
-              <div className="group relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-orange-500/20 transition-all duration-500">
+              <div className="group relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-orange-500/20 transition-all duration-500 hover:-translate-y-2">
 
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-orange-500/[0.03]"></div>
 
@@ -132,7 +132,7 @@ function Brands() {
               </div>
 
               {/* Card 3 */}
-              <div className="group relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-orange-500/20 transition-all duration-500">
+              <div className="group relative overflow-hidden bg-white/[0.03] border border-white/10 rounded-2xl p-6 hover:border-orange-500/20 transition-all duration-500 hover:-translate-y-2">
 
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-orange-500/[0.03]"></div>
 
@@ -204,6 +204,9 @@ function Brands() {
         </div>
 
       </div>
+
+      {/* Bottom Fade */}
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#0a0a0a] pointer-events-none"></div>
 
     </section>
 

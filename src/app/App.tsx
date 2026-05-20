@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/home/Hero";
 import Services from "./components/home/Services";
-import Guarantee from "./components/home/Guarantee";
+
 import Testimonials from "./components/home/Testimonials";
 import CTA from "./components/home/CTA";
 import Footer from "./components/layout/Footer";
@@ -45,8 +45,7 @@ function HomePage() {
       <ImageWithFallback />
       
 
-      {/* ACE AutoCare's Guarantee Section */}
-       <Guarantee />
+     
        
 
       {/* Testimonials Section */}
