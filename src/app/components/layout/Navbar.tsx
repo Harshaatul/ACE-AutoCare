@@ -14,37 +14,27 @@ function Navbar() {
 
   const [showNavbar, setShowNavbar] = useState(true);
 
-  const [lastScrollY, setLastScrollY] = useState(0);
+  useEffect(() => {
 
- useEffect(() => {
+    const handleScroll = () => {
 
-  const handleScroll = () => {
+      if (window.scrollY > 700) {
 
-    const currentScrollY = window.scrollY;
+        setShowNavbar(false);
 
-    // Hide navbar when scrolling down
-    if (currentScrollY > lastScrollY && currentScrollY > 100) {
+      } else {
 
-      setShowNavbar(false);
+        setShowNavbar(true);
 
-    }
+      }
 
-    // Show navbar only after scrolling up significantly
-    if (lastScrollY - currentScrollY > 50) {
+    };
 
-      setShowNavbar(true);
+    window.addEventListener("scroll", handleScroll);
 
-    }
+    return () => window.removeEventListener("scroll", handleScroll);
 
-    setLastScrollY(currentScrollY);
-
-  };
-
-  window.addEventListener("scroll", handleScroll);
-
-  return () => window.removeEventListener("scroll", handleScroll);
-
-}, [lastScrollY]);
+  }, []);
 
   return (
 
