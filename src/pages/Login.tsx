@@ -8,38 +8,29 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = async (
-  e: React.FormEvent
-) => {
-
-  e.preventDefault();
+  const handleLogin = async () => {
 
   try {
 
-    const response = await api.post("/api/login", {
-      email,
-      password,
-});
+    const response = await api.post(
+      "/api/login",
+      {
+        email,
+        password,
+      }
+    );
 
     const data = await response.json();
 
     if (!response.ok) {
 
-      alert(data.message);
+      alert(data.message || "Login failed");
 
       return;
 
     }
 
-    localStorage.setItem(
-      "token",
-      data.token
-    );
-
-    localStorage.setItem(
-      "isLoggedIn",
-      "true"
-    );
+    localStorage.setItem("token", data.token);
 
     alert("Login successful");
 
@@ -64,7 +55,13 @@ function Login() {
           ACE AutoCare Login
         </h1>
 
-        <form onSubmit={handleLogin} className="space-y-6">
+        <form
+          onSubmit={(e) => {
+           e.preventDefault();
+           handleLogin();
+        }}
+          className="space-y-6"
+        >
 
           <input
             type="email"

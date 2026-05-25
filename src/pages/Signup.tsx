@@ -12,9 +12,9 @@ export default function Signup() {
 
   const handleSignup = async () => {
 
-    try {
+  try {
 
-     const response = await api.post(
+    const response = await api.post(
       "/api/signup",
       {
         fullName,
@@ -23,29 +23,29 @@ export default function Signup() {
       }
     );
 
-      const data = await response.json();
+    const data = await response.json();
 
-      if (!response.ok) {
+    if (!response.ok) {
 
-        alert(data.message);
+      alert(data.message || "Signup failed");
 
-        return;
-
-      }
-
-      alert("Signup successful");
-
-      navigate("/login");
-
-    } catch (error) {
-
-      console.error(error);
-
-      alert("Server error");
+      return;
 
     }
 
-  };
+    alert("Signup successful");
+
+    navigate("/login");
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert("Server error");
+
+  }
+
+};
 
   return (
 

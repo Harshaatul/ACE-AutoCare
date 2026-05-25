@@ -47,6 +47,7 @@ app.post(
           carBrand,
           service,
           date: new Date(date),
+          status: "Pending",
           message,
           userId: req.user.userId,
           

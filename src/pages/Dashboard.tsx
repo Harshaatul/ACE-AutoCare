@@ -21,6 +21,15 @@ import { api } from "../services/api";
 function Dashboard() {
 
   const [bookings, setBookings] = useState<any[]>([]);
+  const totalBookings = bookings.length;
+
+  const pendingBookings = bookings.filter(
+   (b) => b.status === "Pending"
+  ).length;
+
+  const completedBookings = bookings.filter(
+    (b) => b.status === "Completed"
+  ).length;
 
   const navigate = useNavigate();
 
@@ -136,7 +145,7 @@ function Dashboard() {
                 </p>
 
                 <h2 className="text-6xl font-black text-white">
-                  0
+                  {completedBookings}
                 </h2>
 
               </div>
@@ -163,7 +172,7 @@ function Dashboard() {
                 </p>
 
                 <h2 className="text-6xl font-black text-white">
-                  {bookings.length}
+                  {totalBookings}
                 </h2>
 
               </div>
@@ -190,7 +199,7 @@ function Dashboard() {
                 </p>
 
                 <h2 className="text-6xl font-black text-white">
-                  {bookings.length}
+                  {pendingBookings}
                 </h2>
 
               </div>
