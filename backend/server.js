@@ -203,17 +203,16 @@ app.post("/api/login", async (req, res) => {
 
     }
 
-    const token = jwt.sign(
-      {
-        userId: user.id,
-        email: user.email,
-      },
-      "secretkey",
-      {
-        expiresIn: "7d",
-      }
-    );
-
+  const token = jwt.sign(
+  {
+    userId: user.id,
+    email: user.email,
+  },
+  process.env.JWT_SECRET,
+  {
+    expiresIn: "7d",
+  }
+  );
     res.status(200).json({
       message: "Login successful",
       token,

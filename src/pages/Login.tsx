@@ -1,3 +1,4 @@
+import { api } from "../services/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -15,21 +16,10 @@ function Login() {
 
   try {
 
-    const response = await fetch(
-      "http://localhost:5000/api/login",
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      }
-    );
+    const response = await api.post("/api/login", {
+      email,
+      password,
+});
 
     const data = await response.json();
 

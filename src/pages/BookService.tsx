@@ -1,3 +1,4 @@
+import { api } from "../services/api";
 import { useState } from "react";
 
 import {
@@ -55,24 +56,10 @@ function BookService() {
     e.preventDefault();
 
     try {
-
-      const response = await fetch(
-        "http://localhost:5000/api/bookings",
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "Content-Type": "application/json",
-
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-
-          },
-
-          body: JSON.stringify(formData),
-
-        }
+      const response = await api.post(
+        "/api/bookings",
+          formData,
+          localStorage.getItem("token") || undefined
       );
 
       const data = await response.json();

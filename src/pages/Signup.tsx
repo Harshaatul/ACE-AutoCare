@@ -1,3 +1,4 @@
+import { api } from "../services/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,22 +14,14 @@ export default function Signup() {
 
     try {
 
-      const response = await fetch(
-        "http://localhost:5000/api/signup",
-        {
-          method: "POST",
-
-          headers: {
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({
-            fullName,
-            email,
-            password,
-          }),
-        }
-      );
+     const response = await api.post(
+      "/api/signup",
+      {
+        fullName,
+        email,
+        password,
+      }
+    );
 
       const data = await response.json();
 

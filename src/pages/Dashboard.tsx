@@ -7,9 +7,20 @@ import {
   Home,
 } from "lucide-react";
 
-import { useNavigate } from "react-router-dom";
+import {
+  useNavigate,
+} from "react-router-dom";
+
+import {
+  useEffect,
+  useState,
+} from "react";
+
+import { api } from "../services/api";
 
 function Dashboard() {
+
+  const [bookings, setBookings] = useState<any[]>([]);
 
   const navigate = useNavigate();
 
@@ -19,6 +30,33 @@ function Dashboard() {
     navigate("/login");
 
   };
+
+  useEffect(() => {
+
+  const fetchBookings = async () => {
+
+    try {
+
+      const response = await api.get(
+        "/api/bookings",
+        localStorage.getItem("token") || ""
+      );
+
+      const data = await response.json();
+
+      setBookings(data);
+
+    } catch (error) {
+
+      console.error(error);
+
+    }
+
+  };
+
+  fetchBookings();
+
+}, []);
 
   return (
 
@@ -125,7 +163,7 @@ function Dashboard() {
                 </p>
 
                 <h2 className="text-6xl font-black text-white">
-                  0
+                  {bookings.length}
                 </h2>
 
               </div>
@@ -152,7 +190,7 @@ function Dashboard() {
                 </p>
 
                 <h2 className="text-6xl font-black text-white">
-                  0
+                  {bookings.length}
                 </h2>
 
               </div>
@@ -169,7 +207,7 @@ function Dashboard() {
 
         </div>
 
-        {/* Recent Services */}
+                {/* Recent Services */}
         <div className="mt-12 bg-white/[0.04] border border-white/10 rounded-3xl p-10 backdrop-blur-xl">
 
           <div className="flex items-center gap-4 mb-10">
@@ -194,35 +232,70 @@ function Dashboard() {
 
           </div>
 
-          {/* Empty State */}
-          <div className="border border-dashed border-white/10 rounded-3xl p-20 text-center">
+          <div className="space-y-6">
 
-            <div className="w-20 h-20 mx-auto rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center mb-6">
+            {bookings.length === 0 ? (
 
-              <Calendar className="w-10 h-10 text-gray-500" />
+              <div className="border border-dashed border-white/10 rounded-3xl p-20 text-center">
 
-            </div>
+                <div className="w-20 h-20 mx-auto rounded-full bg-white/[0.03] border border-white/10 flex items-center justify-center mb-6">
 
-            <h3 className="text-2xl font-bold text-white mb-3">
-              No Services Yet
-            </h3>
+                  <Calendar className="w-10 h-10 text-gray-500" />
 
-            <p className="text-gray-400 max-w-lg mx-auto leading-relaxed">
+                </div>
 
-              You haven't booked any services yet.
-              Schedule your first premium car service with
-              ACE AutoCare today.
+                <h3 className="text-2xl font-bold text-white mb-3">
+                  No Services Yet
+                </h3>
 
-            </p>
+                <p className="text-gray-400 max-w-lg mx-auto leading-relaxed">
 
-            <button
-              onClick={() => navigate("/book-service")}
-              className="mt-8 bg-gradient-to-r from-red-500 to-orange-500 hover:scale-105 transition-all duration-300 text-white font-bold px-8 py-4 rounded-2xl shadow-[0_0_25px_rgba(255,0,0,0.30)]"
-            >
+                  You haven't booked any services yet.
+                  Schedule your first premium car service with
+                  ACE AutoCare today.
 
-              Book Service
+                </p>
 
-            </button>
+              </div>
+
+            ) : (
+
+              bookings.map((booking, index) => (
+
+                <div
+                  key={index}
+                  className="bg-white/[0.03] border border-white/10 rounded-3xl p-8 flex flex-col md:flex-row md:items-center md:justify-between gap-6"
+                >
+
+                  <div>
+
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {booking.service}
+                    </h3>
+
+                    <p className="text-gray-400">
+                      {booking.carBrand}
+                    </p>
+
+                    <p className="text-gray-500 mt-2">
+                      {new Date(booking.date).toLocaleDateString()}
+                    </p>
+
+                  </div>
+
+                  <div className="flex items-center gap-4">
+
+                    <span className="px-5 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 font-semibold">
+                      Pending
+                    </span>
+
+                  </div>
+
+                </div>
+
+              ))
+
+            )}
 
           </div>
 
