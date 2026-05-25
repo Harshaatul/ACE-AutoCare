@@ -59,8 +59,15 @@ function Hero() {
           </button>
 
           <button
-            className="border border-white/20 bg-white/10 backdrop-blur-sm text-white px-10 py-5 rounded-2xl text-lg font-semibold hover:bg-white/20 transition-all duration-300"
-          >
+            onClick={() =>
+              document
+                .getElementById("services")
+                ?.scrollIntoView({
+              behavior: "smooth",
+                })
+            }
+              className="px-10 py-5 rounded-2xl border border-white/20 bg-white/5 backdrop-blur-md text-white text-xl font-semibold hover:bg-white/10 hover:border-red-500/40 transition-all duration-300"
+            >
             Explore Services
           </button>
 
